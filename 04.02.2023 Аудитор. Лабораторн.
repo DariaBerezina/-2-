@@ -1,0 +1,352 @@
+using System;
+using System.Data;
+using System.Linq.Expressions;
+
+class Programm
+{
+    static int k = 0;
+    static void Proverka_str(ref string str)
+    {
+        string alph = "йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ ";
+        foreach (char c in str)
+        {
+            if (!alph.Contains(c))
+            {
+                Console.WriteLine("Данные введены некорректно.Пропробуйте ввести данные еще раз");
+                str = Console.ReadLine();
+                Proverka_str(ref str);
+            }
+        }
+    }
+    static int k2 = 0, k3 = 0;
+    static void Proverka_int(ref string str)
+    {
+        try
+        {
+            if (k2>0)
+            {
+                k2 = 0;
+            }
+            int r = Convert.ToInt32(str);
+            str = r.ToString();
+            k2++;
+        }
+        catch (FormatException)
+        {
+            if (k2>0 && k3<200)
+            {
+                k2 = 0;
+                return;
+            }
+            else if (k3>=200)
+            {
+                Console.WriteLine("Слишком много неверных попыток.Для продолжения коррекной работы программа будет перезапущена.");
+                Console.WriteLine("Нажмите любую клавишу для продолжения.");
+                Console.ReadKey();
+                Console.Clear();
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Данные введены некорректно. Попробуйте ввести данные еще раз.");
+                str = Console.ReadLine();
+                Console.Clear();
+                k3++;
+                Proverka_int(ref str);
+                return;
+            }
+        }
+    }
+    class Student
+    {
+        public string name { get; set; }
+        public int day { get; set; }
+        public int month { get; set; }
+        public int year { get; set; }
+        public string group { get; set; }
+        public int kp { get; set; }
+        public string[][] predmet_ozenka { get; set; }
+        public int max_l { get; set; }
+    }
+    static Student Create()
+    {
+        Student s = new Student();
+
+        string pr_str = "";
+
+        Console.WriteLine("Введите ФИО студента");
+        pr_str = Console.ReadLine();
+        Proverka_str(ref pr_str);
+        s.name = pr_str;
+        Console.Clear();
+
+        Console.WriteLine("Введите день рождения студента.");
+        pr_str = Console.ReadLine();
+        Proverka_int(ref pr_str);
+        s.day = Convert.ToInt32(pr_str);
+        Console.Clear();
+
+        Console.WriteLine("Введите месяц рождения студента.");
+        pr_str = Console.ReadLine();
+        Proverka_int(ref pr_str);
+        s.month =Convert.ToInt32(pr_str);
+        Console.Clear();
+
+        Console.WriteLine("Введите год рождения студента.");
+        pr_str = Console.ReadLine();
+        Proverka_int(ref pr_str);
+        s.year = Convert.ToInt32(pr_str);
+        Console.Clear();
+
+        Console.WriteLine("Введите группу, в которой обучается студент.");
+        pr_str = Console.ReadLine();
+        pr_str ??= "Не введены данные о группе";
+        s.group = pr_str;
+        Console.Clear();
+
+        Console.WriteLine("Введите количество предметов, которые изучает студент.");
+        pr_str = Console.ReadLine();
+        Proverka_int(ref pr_str);
+        s.kp = Convert.ToInt32(pr_str);
+        Console.Clear();
+
+        s.predmet_ozenka = new string[s.kp][];
+        for (int i= 0; i<s.kp; i++)
+        {
+            s.predmet_ozenka[i] = new string[2];
+        }
+        for (int i = 0; i < s.kp;i++)
+        {
+            Console.WriteLine($"Введите название предмета №{i + 1}");
+            pr_str = Console.ReadLine();
+            Proverka_str(ref pr_str);
+            s.predmet_ozenka[i][0] = pr_str;
+            Console.Clear();
+
+            if (pr_str.Length > s.max_l)
+            {
+                s.max_l = pr_str.Length;
+            }
+            Console.WriteLine($"Введите оценку, полученную за предмет \"{s.predmet_ozenka[i][0]}\". Если оценка не выставлена, введите -1");
+            pr_str = Console.ReadLine();
+            Proverka_int(ref pr_str);
+            s.predmet_ozenka[i][1] = pr_str;
+            Console.Clear();
+
+        }
+        Console.WriteLine("Нажмите любую клавишу для продолжения.");
+        Console.ReadLine();
+        Console.Clear();
+        return s;
+    }
+    static void Menu(Student[] mass)
+    {
+        if (k>15)
+        {
+            Console.WriteLine("Для сохранения корректной работы программы необходима перезагрузка.");
+            Console.WriteLine("Нажмите любую клавишу для продолжения.");
+            Console.ReadKey();
+            return;
+        }
+        Console.Clear();
+        Console.WriteLine("\tМеню\n");
+        Console.WriteLine("1. Поиск студентов, обучающихся в заданной группе.");
+        Console.WriteLine("2. Поиск студентов должников.");
+        Console.WriteLine("3. Поиск студентов отличников.");
+        Console.WriteLine("4. Поиск студентов младше 20.");
+        Console.WriteLine("5. Список введенных студентов");
+        Console.WriteLine("6. Выход из программы\n");
+        Console.WriteLine("Введите номер интересующего вас пункта.");
+        string number = Console.ReadLine();
+        Console.Clear();
+        Proverka_int(ref number);
+        switch (Convert.ToInt32(number))
+        {
+            case 1:
+                int odin = 0;
+                Console.WriteLine("Введите группу, студентов которой нужно найти.");
+                string group = Console.ReadLine();
+                group ??= String.Empty;
+                foreach (Student s in mass)
+                {
+                    if (s.group == group)
+                    {
+                        odin++;
+                        Console.WriteLine(s.name);
+                    }
+                }
+                if (odin ==0)
+                {
+                    Console.WriteLine("Информация о данной группе отсутствует.");
+                }
+                Console.WriteLine("Нажмите \"enter\" для возврата к меню. Если хотите выйти из программы введите \"exit\".");
+                switch (Console.ReadLine())
+                {
+                    case "exit":
+                        return;
+                    default:
+                        Menu(mass);
+                        k++;
+                        Console.Clear();
+                        break;
+                }
+                break;
+            case 2:
+                int dva = 0;
+                foreach (Student s in mass)
+                {
+                    for (int i=0; i<s.kp;i++)
+                    {
+                        if (s.predmet_ozenka[i][1] == "-1" || s.predmet_ozenka[i][1] == "2")
+                        {
+                            Console.WriteLine(s.name);
+                            dva++;
+                            break;
+                        }
+                    }
+                }
+                if (dva==0)
+                {
+                    Console.WriteLine("Нет студентов с задолжностями");
+                }
+                Console.WriteLine("Нажмите \"enter\" для возврата к меню. Если хотите выйти из программы введите \"exit\".");
+                switch (Console.ReadLine())
+                {
+                    case "exit":
+                        return;
+                    default:
+                        k++;
+                        Console.Clear();
+                        Menu(mass);
+                        break;
+                }
+                break;
+            case 3:
+                int tri = 0;
+                foreach (Student s in mass)
+                {
+                    int kol_vo = 0;
+                    for (int i = 0; i < s.kp; i++)
+                    {
+                        if (s.predmet_ozenka[i][1] == "5" )
+                        {
+                            kol_vo++;
+                        }
+                    }
+                    if (kol_vo == s.kp)
+                    {
+                        tri++;
+                        Console.WriteLine(s.name);
+                    }
+                }
+                if (tri == 0)
+                {
+                    Console.WriteLine("Среди групп нет студентов-отличников.");
+                }
+                Console.WriteLine("Нажмите \"enter\" для возврата к меню. Если хотите выйти из программы введите \"exit\".");
+                switch (Console.ReadLine())
+                {
+                    case "exit":
+                        return;
+                    default:
+                        k++;
+                        Console.Clear();
+                        Menu(mass);
+                        break;
+                }
+                break;
+            case 4:
+                int chet = 0;
+                Console.WriteLine("Введите текущий год");
+                string year = Console.ReadLine();
+                Proverka_int(ref year);
+                foreach (Student s in mass)
+                {
+                    if ((Convert.ToInt32(year) - s.year)*365+s.month*31+s.day < 20*365)
+                    {
+                        chet++;
+                        Console.WriteLine(s.name);
+                    }
+                }
+                if (chet==0) 
+                {
+                    Console.WriteLine("Среди групп студентов младше 20 не найдено");
+                }
+                Console.WriteLine("Нажмите \"enter\" для возврата к меню. Если хотите выйти из программы введите \"exit\".");
+                switch (Console.ReadLine())
+                {
+                    case "exit":
+                        return;
+                    default:
+                        k++;
+                        Console.Clear();
+                        Menu(mass);
+                        break;
+                }
+                break;
+            case 5:
+                int k_s = 0;
+                foreach (Student s in mass)
+                {
+                    k_s++;
+                    Console.WriteLine($"Студент №{k_s}:\n");
+                    Console.WriteLine($"Имя: { s.name}.");
+                    Console.WriteLine($"День рождения: {s.day}.");
+                    Console.WriteLine($"Месяц рождения: {s.month}.");
+                    Console.WriteLine($"Год рождения: {s.year}.");
+                    for (int i = 0; i < s.kp; i++)
+                    {
+                        int l = s.max_l + 1;
+                        Console.WriteLine($"Название предмета: { s.predmet_ozenka[i][0]}. Оценка: { s.predmet_ozenka[i][1]}.");
+                    }
+                    Console.WriteLine();
+;
+                }
+                Console.WriteLine("Нажмите \"enter\" для возврата к меню. Если хотите выйти из программы введите \"exit\".");
+                switch (Console.ReadLine())
+                {
+                    case "exit":
+                        return;
+                    default:
+                        k++;
+                        Console.Clear();
+                        Menu(mass);
+                        break;
+                }
+                break;
+            case 6:
+                Console.WriteLine("Вы уверены, что хотите выйти? Если да, введите \"да\", если нет, то нажмите \"enter\" для возврата к меню.");
+                string answer = Console.ReadLine();
+                Proverka_str(ref answer);
+                if (answer == "да" || answer == "Да" || answer == "ДА" || answer == "дА" )
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    Console.Clear();
+                    Menu(mass);
+                    k++;
+                }
+                break;
+
+
+
+        }
+    }
+    static void Main()
+    {
+        Console.WriteLine("Введите количество студентов.");
+        string N = Console.ReadLine();
+        Console.Clear();
+        Proverka_int(ref N);
+        int n = Convert.ToInt32(N);
+        
+        Student[] mass = new Student[n];
+        for (int i=0; i<n;i++)
+        {
+            mass[i] = Create();
+        }
+        Menu(mass);
+    }
+}
