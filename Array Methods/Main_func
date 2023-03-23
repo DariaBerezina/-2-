@@ -1,0 +1,57 @@
+using ConsoleApp3;
+using System;
+using System.IO;
+using System.Text;
+class HelloWorld
+{
+    static int Proverka(string ch)
+    {
+        int m = 0;
+        string s = null;
+        try
+        {
+            m = Convert.ToInt32(ch);
+            return m;
+        }
+        catch
+        {
+            Console.WriteLine("Введен некорректный запрос. Пожалуйста повторите попытку ввода.");
+            s = Console.ReadLine();
+            m = Proverka(s);
+        }
+        return m;
+    }
+
+    static void Main()
+    {
+        Console.WriteLine("Введите количество элементов массива");
+        int n = Convert.ToInt32(Console.ReadLine());
+        int[] my_array = new int[n];
+        for (int i = 0;i < n; i++)
+        {
+            Console.WriteLine($"Ниже введите элемент массива №{i + 1}");
+            my_array[i] = Proverka(Console.ReadLine());
+        }
+
+        Console.WriteLine("Ваш массив:");
+        for (int i = 0; i < my_array.Length; i++)
+        {
+            Console.WriteLine(my_array[i]);
+        }
+        Console.WriteLine("Ваш массив был успешно заполнен! Нажмите любую клавишу для продолжения.");
+        Console.ReadKey();
+        Console.Clear();
+
+
+        Menu m = new Menu();
+        m.my_arr = my_array;
+        Console.WriteLine("Ваш массив:");
+        for (int i = 0; i < m.my_arr.Length; i++)
+        {
+            Console.WriteLine(m.my_arr[i]);
+        }
+        Console.ReadLine();
+        m.MainMenu();
+    }
+}
+
