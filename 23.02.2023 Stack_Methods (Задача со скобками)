@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+
+namespace Brackets
+{
+    class Program
+    {
+        public delegate void No();
+        static void Main(string[] args)
+        {
+            No n = delegate()
+            {
+                Console.WriteLine("Закрытие скобок происходит в неправильном порядке.");
+                Console.ReadLine();
+                Environment.Exit(0);
+            };
+
+           Stack<string> stack_1 = new Stack<string>();
+            Stack<string> stack_2 = new Stack<string>();
+            string str = Console.ReadLine();
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                stack_1.Push(Convert.ToString(str[i]));
+            }
+            int middle = stack_1.Count / 2;
+            int ost = stack_1.Count - middle;
+            for (int i = 0; i < ost; i++)
+            {
+                stack_2.Push(stack_1.Pop());
+            }
+            foreach(string ch in stack_1)
+            {
+                switch (ch)
+                {
+                    case "{":
+                        if (stack_2.Pop() != "}")
+                        {
+                            n();
+                        }
+                        break;
+                    case "}":
+                        if (stack_2.Pop() != "{")
+                        {
+                            n();
+                        }
+                        break;
+                    case "(":
+                        if (stack_2.Pop() != ")")
+                        {
+                            n();
+                        }
+                        break;
+                    case ")":
+                        if (stack_2.Pop() != "(")
+                        {
+                            n();
+                        }
+                        break;
+                    case "]":
+                        if (stack_2.Pop() != "[")
+                        {
+                            n();
+                        }
+                        break;
+                    case "[":
+                        if (stack_2.Pop() != "]")
+                        {
+                            n();
+                        }
+                        break;
+                }
+            }
+            Console.WriteLine("Закрытие скобок осуществлено в верном порядке."); 
+        }
+    }
+}
