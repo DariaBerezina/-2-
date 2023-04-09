@@ -1,0 +1,37 @@
+using System;
+using static Delegates.Program;
+
+namespace ConsoleApp1
+{
+    public interface IMath
+    {
+        public static void sum(double x, double y)
+        {
+            Console.WriteLine($"Сумма равна: {x + y}");
+        }
+        public static void diff(double x, double y)
+        {
+            Console.WriteLine($"Разность равна: {x - y}");
+        }
+        public static void mult(double x, double y)
+        {
+            Console.WriteLine($"Проиведение равно: {x * y}");
+        }
+        public static void div(double x, double y)
+        {
+            try
+            {
+                double ch = x / y;
+                Console.WriteLine($"Частное равно: {ch}");
+            }
+            catch
+            {
+                Console.WriteLine("На ноль делить нельзя.");
+                Console.WriteLine();
+                Console.WriteLine("Нажмите любую клавишу для возвращения к меню");
+                Console.ReadKey();
+                Menu.menu();
+            }
+        }
+    }
+}
