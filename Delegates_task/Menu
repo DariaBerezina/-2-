@@ -1,0 +1,147 @@
+using Delegates;
+using System;
+using System.Collections.Generic;
+
+namespace ConsoleApp1
+{
+    public class Menu
+    {
+        static int count = 0;
+        static string sign = "";
+        public static double x = 0;
+        public static double y = 0;
+        public static string oper = "";
+
+        public static void menu()
+        {
+            Console.Clear();
+            Console.WriteLine("                            Добро пожаловать в Baby-Calculating!");
+            Console.WriteLine("1. Выбор операции.");
+            Console.WriteLine("2. Ввод первого числа.");
+            Console.WriteLine("3. Ввод второго числа.");
+            Console.WriteLine("4. Вывод результата.");
+            Console.WriteLine("5. Вывод выбранных значений.");
+            Console.WriteLine("6. Выход.");
+            Console.WriteLine();
+            Console.WriteLine("Введите номер интересующего вас пункта ниже:");
+            double v = check_p1();
+            Console.WriteLine("Нажмите любую клавищу для продолжения...");
+            Console.ReadKey();
+            Console.Clear();
+            switch (v)
+            {
+                case 1:
+                    oper = Op();
+                    Console.WriteLine("Операция была успешно записана.");
+                    Back();
+                    break;
+                case 2:
+                    x = First();
+                    Console.WriteLine("Число было успешно записано.");
+                    Back();
+                    break;
+                case 3:
+                    y = Second();
+                    Console.WriteLine("Число было успешно записано.");
+                    Back();
+                    break;
+                case 4:
+                    Result();
+                    Back();
+                    break;
+                case 5:
+                    Chosen();
+                    Back();
+                    break;
+                case 6:
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Был введен неверный номер пункта или ввод осуществлялся в неверном формате. Пожалуйста повторите попытку ввода.");
+                    Back();
+                    break;
+            }
+
+        }
+       
+        private static bool Op_check()
+        {
+            if (sign != "+" && sign != "-" && sign != "*" && sign != "/")
+            {
+                return false;
+
+            }
+            else
+            {
+                return true;
+            }
+        }
+        private static string Op()
+        {
+            Console.WriteLine("Введите знак операции, которую желаете осуществить.");
+            sign = Console.ReadLine();
+            Console.WriteLine();
+            while (Op_check() != true)
+            {
+                Console.WriteLine("Такой операции не существует или она не реализованна в данном калькуляторе. Повторите попытку ввода.");
+                sign = Console.ReadLine();
+                Console.WriteLine();
+                Op_check();
+            }
+            return sign;
+        }
+        public static double First()
+        {
+            Console.WriteLine("Введите первое число.");
+            return check_p1();
+        }
+        public static double Second()
+        {
+            Console.WriteLine("Введите второе число.");
+            return check_p1(); ;
+        }
+        public static void Result()
+        {
+            try
+            {
+                Program.dict[oper](x, y);
+            }
+            catch
+            {
+                Console.WriteLine("Вы забыли выбрать операцию. Вернитесь к меню и выберете пункт №1, для записи интересующей вас операции.");
+                Console.WriteLine();
+                Console.WriteLine("Нажмите любую клавищу для возвращения к меню.");
+                Console.ReadLine();
+                menu();
+            }
+        }
+        public static void Chosen()
+        {
+            Console.WriteLine($"Выбранная вами операция: {oper}");
+            Console.WriteLine($"Первое число: {x}");
+            Console.WriteLine($"Второе число: {y}");
+        }
+        public static void Back()
+        {
+            Console.WriteLine("Нажмите любую клавишу для возвращения к меню...");
+            Console.ReadLine();
+            menu();
+        }
+        public static double check_p1()
+        {
+            bool check_result = check_p2();
+            while (check_result != true)
+            {
+                Console.WriteLine("Некорректный вид введенных данных. Пожалуйста повторите попытку ввода.");
+                check_result = check_p2();
+            }
+            return count;
+        }
+        public static bool check_p2()
+        {
+            string str = Console.ReadLine();
+            Console.WriteLine();
+            return int.TryParse(str, out count);
+        }
+    }
+}
