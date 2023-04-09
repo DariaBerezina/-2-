@@ -1,0 +1,21 @@
+using ConsoleApp1;
+using System;
+using System.Collections.Generic;
+using static ConsoleApp1.Menu;
+
+namespace Delegates
+{
+    class Program
+    {
+        public delegate void Operation(double x, double y);
+        public static Dictionary<string, Operation> dict = new Dictionary<string, Operation>();
+        static void Main(string[] args)
+        {
+            Operation sum = new(IMath.sum); dict.Add("+", sum);
+            Operation diff = new(IMath.diff); dict.Add("-", diff);
+            Operation mult = new(IMath.mult); dict.Add("*", mult);
+            Operation div = new(IMath.div); dict.Add("/", div);
+            Menu.menu();
+        }
+    }
+}
