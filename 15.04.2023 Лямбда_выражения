@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication31
+{
+    class Program
+    {
+        delegate double Operation(double i);
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите первое число:");
+            double ch_1 = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите второе число:");
+            double ch_2 = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите третье число:");
+            double ch_3 = Convert.ToInt32(Console.ReadLine());
+            Operation Min = min => Math.Min(Math.Min(ch_1, ch_2), ch_3);
+            Operation Max = max => Math.Max(Math.Max(ch_1, ch_2), ch_3);
+            Operation Sum = sum => ch_1 + ch_2 + ch_3;
+            Operation Mult = mult => ch_1 * ch_2 * ch_3;
+            Operation Average = average => Sum(0) / 3.0;
+            Console.WriteLine("Минимальный элемент равен : " + Min(0));
+            Console.WriteLine("Максимальный элемент равен : " + Max(0));
+            Console.WriteLine("Сумма элементов равна: " + Sum(0));
+            Console.WriteLine("Произведение элементов равно: " + Mult(0));
+            Console.WriteLine("Среднее арифметическое элементов равно: " + Average(0));
+            Console.ReadLine();
+        }
+    }
+
+}
