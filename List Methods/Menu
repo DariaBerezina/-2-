@@ -1,0 +1,355 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    public class Menu
+    {
+        static int count = 0;
+        static string str = string.Empty;
+        static string sign = string.Empty;
+        private static bool Op_check()
+        {
+            if (sign != ">" && sign != "<" && sign != "=" && sign != "1" && sign != "2" && sign != "3" && sign != "1.>" && sign != "2.<" && sign != "3.=")
+            {
+                return false;
+
+            }
+            else
+            {
+                return true;
+            }
+        }
+        private static string Op()
+        {
+            sign = Console.ReadLine();
+            Console.WriteLine();
+            while (Op_check() != true)
+            {
+                Console.WriteLine("Такой операции не подерживается данным методом. Повторите попытку ввода.");
+                sign = Console.ReadLine();
+                Console.WriteLine();
+                Op_check();
+            }
+            return sign;
+        }
+        public static string check_p1()
+        {
+            bool check_result = check_p2();
+            while (check_result != true)
+            {
+                Console.WriteLine("Некорректный вид введенных данных. Пожалуйста повторите попытку ввода.");
+                check_result = check_p2();
+            }
+            return str;
+        }
+        public static bool check_p2()
+        {
+            str = Console.ReadLine();
+            if (str == "end" || str == "END" || str == "End" || str == "\"end\"" || str == "\"END\"" || str == "\"End\"")
+            {
+                return true;
+            }
+            Console.WriteLine();
+            return int.TryParse(str, out count);
+        }
+
+        private void DoubleEnter()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+        public List<int> my_list { get; set; }
+        private void Next()
+        {
+            Console.WriteLine("Нажмите любую клавишу для продолжения.");
+            Console.ReadKey();
+            Console.Clear();
+        }
+        private void Back()
+        {
+            Console.WriteLine("Нажмите любую клавишу для возвращения к главному меню.");
+            Console.ReadKey();
+            MainMenu();
+        }
+        public void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("                     Приветствуем в реализации методов класса List!");
+            Console.WriteLine("1. Длина листа.");
+            Console.WriteLine("2. Поиски элементов с условием.");
+            Console.WriteLine("3. Узнать значение элемента под определенным индексом.");
+            Console.WriteLine("4. Отсортировать лист.");
+            Console.WriteLine("5. Изменить последовательность листа на обратную.");
+            Console.WriteLine("6. Бинарный поиск.");
+            Console.WriteLine("7. Изменить значение элемента под определенным номером.");
+            Console.WriteLine("8. Поиск индекса по значению элемента.");
+            Console.WriteLine("9. Изменить размер листа.");
+            Console.WriteLine("10. Очистка листа.");
+            Console.WriteLine("11. Вывод листа.");
+            Console.WriteLine("12. Выход.");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Выберите интересующий вас метод и введите его номер ниже.");
+            int number = int.Parse(check_p1());
+            switch (number)
+            {
+                //1. Длина листа.
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine($"Длина вашего листа = {my_list.Count}");
+                    Back();
+                    break;
+                //2. Поиски элементов с условием.
+                case 2:
+                    Console.Clear();
+                    Console.WriteLine("Ниже введите вид условия из перечисленных, который вас интересует.");
+                    Console.WriteLine("1.>");
+                    Console.WriteLine("2.<");
+                    Console.WriteLine("3.=");
+                    DoubleEnter();
+
+                    string condition = Op();
+                    DoubleEnter();
+                    Console.WriteLine("Ниже введите число, создающее условие.");
+                    int digit = int.Parse(check_p1());
+                    Next();
+                    Console.WriteLine("Какие элементы найти?");
+                    DoubleEnter();
+                    Console.WriteLine("2.1 Поиск, возвращающий первый элемент, удовлетворяющий условию.");
+                    Console.WriteLine("2.2 Поиск, возвращающий все элементы, удовлетворяющие условию.");
+                    Console.WriteLine("2.3 Поиск, возвращающий последний элемент, удовлетворяющий условию.");
+                    DoubleEnter();
+                    Console.WriteLine("Ниже введите номер интересующего вас пункта.");
+                    string search = Console.ReadLine();
+                    DoubleEnter();
+                    switch (condition)
+                    {
+                        case ">" or "1" or "1.>":
+                            Console.Clear();
+                            if (search == "2.1" || search == "1")
+                            {
+                                var a = my_list.Find(i => Convert.ToInt32(i) > digit);
+                                Console.WriteLine($"Ответ: {a}");
+                            }
+                            else if (search == "2.2" || search == "2")
+                            {
+                                var b = my_list.FindAll(i => i > digit);
+                                Console.Write("Ответ: ");
+                                foreach (var i in b)
+                                {
+                                    Console.Write("\t{0}",i + ";");
+                                }
+                                Console.WriteLine();
+                            }
+                            else if (search == "2.3" || search == "3")
+                            {
+                                var c = my_list.FindLast(i => i > digit);
+                                Console.WriteLine($"Ответ: {c}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Номер пункта был введен некорректно. Вы будете возвращены в главное меню.");
+                                Back();
+                            }
+                            break;
+                        case "<" or "2" or "2.<":
+                            Console.Clear();
+                            if (search == "2.1" || search == "1")
+                            {
+                                var a = my_list.Find(i => i < digit);
+                                Console.WriteLine($"Ответ: {a}");
+                            }
+                            else if (search == "2.2" || search == "2")
+                            {
+                                var b = my_list.FindAll(i => i < digit);
+                                Console.Write("Ответ:");
+                                foreach (var i in b)
+                                {
+                                    Console.Write("\t{0}", i + ";");
+                                }
+                                Console.WriteLine();
+                            }
+                            else if (search == "2.3" || search == "3")
+                            {
+                                var c = my_list.FindLast(i => i < digit);
+                                Console.WriteLine($"Ответ: {c}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Номер пункта был введен некорректно. Вы будете возвращены в главное меню.");
+                                Back();
+                            }
+                            break;
+                        case "=" or "3" or "3.=":
+                            if (search == "2.1" || search == "1")
+                            {
+                                var a = my_list.Find(i => i == digit);
+                                Console.WriteLine($"Ответ: {a}");
+                            }
+                            else if (search == "2.2" || search == "2")
+                            {
+                                var b = my_list.FindAll(i => i == digit);
+                                Console.Write("Ответ: ");
+                                foreach (int i in b)
+                                {
+                                    Console.Write("\t{0}", i + ";");
+                                }
+                                Console.WriteLine();
+                            }
+                            else if (search == "2.3" || search == "3")
+                            {
+                                var c = my_list.FindLast(i => i == digit);
+                                Console.WriteLine($"Ответ: {c}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Номер пункта был введен некорректно. Вы будете возвращены в главное меню.");
+                                Back();
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("Условие было введено неверно.");
+                            Back();
+                            break;
+                    }
+                    break;
+
+
+                //3. Узнать значение элемента под определенным индексом.
+                case 3:
+                    //РЕАЛИЗОВАТЬ МЕТОД
+                    break;
+                //4. Отсортировать лист.
+                case 4:
+                    Console.Clear();
+                    my_list.Sort();
+                    Console.WriteLine("Ваш отсортированный лист:");
+                    DoubleEnter();
+                    Program.Values(my_list);
+                    DoubleEnter();
+                    Back();
+                    break;
+                //5. Изменить последовательность листа на обратную.
+                case 5:
+                    Console.Clear();
+                    my_list.Reverse();
+                    Console.WriteLine("Ваш лист, элементы которого расположены в обратном порядке:");
+                    DoubleEnter();
+                    Program.Values(my_list);
+                    DoubleEnter();
+                    Back();
+                    break;
+                //6. Бинарный поиск.
+                case 6:
+                    Console.Clear();
+                    int[] arr = new int[my_list.Count];
+                    my_list.CopyTo(arr, my_list.Count);
+                    Array.Sort(arr);
+                    List<int> my_sorted_list = new List<int>();
+                    for (int i = 0; i < arr.Length;i++)
+                    {
+                        my_sorted_list.Add(arr[i]);
+                    }
+                    Console.WriteLine("Ниже введите элемент, который хотите найти.");
+                    int s = int.Parse(check_p1());
+                    DoubleEnter();
+                    Console.WriteLine($"Ответ: {my_sorted_list.BinarySearch(s)}");
+                    Back();
+                    break;
+                //7. Изменить значение элемента под определенным номером.
+                case 7:
+                    Console.Clear();
+                    Console.WriteLine("Ниже введите индекс элемента, который хотите изменить и через пробел значение, на которое хотите заменить.");
+                    int ind = int.Parse(check_p1());
+                    int new_value = int.Parse(check_p1());
+                    my_list.Insert(ind, new_value);
+                    DoubleEnter();
+                    Console.WriteLine("Ваш измененный лист:");
+                    Program.Values(my_list);
+                    DoubleEnter();
+                    Back();
+                    break;
+                //8. Поиск индекса по значению элемента.
+                case 8:
+                    Console.Clear();
+                    Console.WriteLine("Ниже введите значение элемента, индекс которого хотите найти.");
+                    int value = int.Parse(check_p1());
+                    DoubleEnter();
+                    Next();
+                    Console.WriteLine("8.1 Поиск наименьшего индекса.");
+                    Console.WriteLine("8.2 Поиск наибольшего индекса.");
+                    DoubleEnter();
+                    Console.WriteLine("Ниже введите номер интересующего вас пункта.");
+                    string num = Console.ReadLine();
+                    switch (num)
+                    {
+                        case "8.1" or "1":
+                            int index = my_list.IndexOf(value);
+                            if (index < 0)
+                            {
+                                Console.WriteLine("Такого элемента нет в листе.");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Ответ: {index}");
+                            }
+                            break;
+                        case "8.2" or "2":
+                            int i = my_list.LastIndexOf(value);
+                            if (i < 0)
+                            {
+                                Console.WriteLine("Такого элемента нет в листе.");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Ответ: {i}");
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("Номер пункта был введен неверно.");
+                            Back();
+                            break;
+                    }
+                    break;
+                //9. Изменить размер листа.
+                case 9:
+                    Console.Clear();
+                    Console.WriteLine("Введите новую размерность листа.");
+                    int dim = int.Parse(check_p1());
+                    int[] ar = new int[my_list.Count];
+                    my_list.CopyTo(ar, my_list.Count);
+                    Array.Resize(ref ar, dim);
+                    my_list = ar.ToList();
+                    DoubleEnter();
+                    Console.WriteLine("Ваш измененный лист:");
+                    Program.Values(my_list);
+                    DoubleEnter();
+                    Back();
+                    break;
+                //10. Очистка листа.
+                case 10:
+                    Console.Clear();
+                    my_list.Clear();
+                    Console.WriteLine("Ваш лист был успешно очищен.");
+                    DoubleEnter();
+                    Back();
+                    break;
+                //Вывод листа
+                case 11:
+                    Console.Clear();
+                    Console.WriteLine("Ваш лист:");
+                    Program.Values(my_list);
+                    break;
+                //12. Выход.
+                case 12:
+                    Environment.Exit(0);
+                    break;
+            }
+            Back();
+        }
+    }
+}
