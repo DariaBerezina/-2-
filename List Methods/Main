@@ -1,6 +1,13 @@
 using ConsoleApp1;
 class Program
 {
+    static int count = 0;
+    public static bool fulfill()
+    {
+        string str = Console.ReadLine();
+        Console.WriteLine();
+        return int.TryParse(str, out count);
+    }
     public static void Values(List<int> list)
     {
         System.Collections.IEnumerator enumerator = list.GetEnumerator();
@@ -16,13 +23,12 @@ class Program
         Menu m = new Menu();
 
         List<int> list = new List<int>();
-        Console.WriteLine("Введите элемент списка. Если желаете прекратить заполнение списка введите \"end\".");
-        string str = Menu.check_p1();
-        while (str != "end" || str != "END" || str != "End" || str != "\"end\""
-            || str != "\"END\"" || str != "\"End\"")
+        Console.WriteLine("Введите элемент списка. Если желаете прекратить заполнение списка введите любое выражение, не являющееся число и нажмите enter.");
+        bool check_result = fulfill();
+        while (check_result == true)
         {
-            list.Add(int.Parse(str));
-            str = Menu.check_p1();
+            list.Add(count);
+            check_result = fulfill();
         }
 
         Console.WriteLine("Ваш лист был успешно заполнен! Нажмите любую клавишу для продолжения.");
