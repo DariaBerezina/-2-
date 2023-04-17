@@ -23,7 +23,7 @@ class Program
         Menu m = new Menu();
 
         List<int> list = new List<int>();
-        Console.WriteLine("Введите элемент списка. Если желаете прекратить заполнение списка введите любое выражение, не являющееся число и нажмите enter.");
+        Console.WriteLine("Введите элемент списка. Если желаете прекратить заполнение списка введите любое выражение, не являющееся числом и нажмите enter.");
         bool check_result = fulfill();
         while (check_result == true)
         {
