@@ -1,13 +1,17 @@
 using ConsoleApp1;
-using System;
-using System.IO;
-using System.Text;
 class Program
 {
-    public static void Values(Array array)
+    static int count = 0;
+    public static bool fulfill()
     {
-        System.Collections.IEnumerator enumerator = array.GetEnumerator();
-        Console.WriteLine("Ваш массив:");
+        string str = Console.ReadLine();
+        Console.WriteLine();
+        return int.TryParse(str, out count);
+    }
+    public static void Values(List<int> list)
+    {
+        System.Collections.IEnumerator enumerator = list.GetEnumerator();
+        Console.WriteLine("Ваш лист:");
         while (enumerator.MoveNext())
         {
             Console.Write("\t{0}", enumerator.Current);
@@ -18,22 +22,24 @@ class Program
     {
         Menu m = new Menu();
 
-        Console.WriteLine("Введите количество элементов массива");
-        int n = Menu.check_p1();
-        Array my_array = Array.CreateInstance(typeof(Int32), n);
-
-        for (int i = 0; i < n;i++)
+        List<int> list = new List<int>();
+        Console.WriteLine("Введите элемент списка. Если желаете прекратить заполнение списка введите любое выражение, не являющееся число и нажмите enter.");
+        bool check_result = fulfill();
+        while (check_result == true)
         {
-            Console.WriteLine($"Введите значение элемента №{i + 1}");
-            my_array.SetValue(Menu.check_p1(),i);
+            list.Add(count);
+            check_result = fulfill();
         }
-        Console.WriteLine("Ваш массив был успешно заполнен! Нажмите любую клавишу для продолжения.");
 
-        Values(my_array);
+        Console.WriteLine("Ваш лист был успешно заполнен! Нажмите любую клавишу для продолжения.");
+        Console.ReadKey();
+
+        Console.Clear();
+        Values(list);
         Console.ReadKey();
         Console.Clear();
 
-        m.my_arr = my_array;
+        m.my_list = list;
         m.MainMenu();
     }
 }
