@@ -18,7 +18,7 @@ namespace ConsoleApp1
 
             }
             else
-           {
+            {
                 return true;
             }
         }
@@ -28,7 +28,7 @@ namespace ConsoleApp1
             Console.WriteLine();
             while (Op_check() != true)
             {
-                Console.WriteLine("Такой операции не подерживается данным методом. Повторите попытку ввода.");
+                Console.WriteLine("Такая операция не подерживается данным методом. Повторите попытку ввода.");
                 sign = Console.ReadLine();
                 Console.WriteLine();
                 Op_check();
@@ -52,13 +52,12 @@ namespace ConsoleApp1
             return int.TryParse(str, out count);
         }
 
-
         private void DoubleEnter()
         {
             Console.WriteLine();
             Console.WriteLine();
         }
-        public List<int> my_list { get; set; }
+        public Array my_arr { get; set; }
         private void Next()
         {
             Console.WriteLine("Нажмите любую клавишу для продолжения.");
@@ -74,18 +73,18 @@ namespace ConsoleApp1
         public void MainMenu()
         {
             Console.Clear();
-            Console.WriteLine("                     Приветствуем в реализации методов класса List!");
-            Console.WriteLine("1. Длина листа.");
+            Console.WriteLine("                     Приветствуем в реализации методов класса Array!");
+            Console.WriteLine("1. Длина массива.");
             Console.WriteLine("2. Поиски элементов с условием.");
-            Console.WriteLine("3. Добавить элемент в лист.");
-            Console.WriteLine("4. Отсортировать лист.");
-            Console.WriteLine("5. Изменить последовательность листа на обратную.");
+            Console.WriteLine("3. Узнать значение элемента под определенным индексом.");
+            Console.WriteLine("4. Отсортировать массив.");
+            Console.WriteLine("5. Изменить последовательность массива на обратную.");
             Console.WriteLine("6. Бинарный поиск.");
             Console.WriteLine("7. Изменить значение элемента под определенным номером.");
             Console.WriteLine("8. Поиск индекса по значению элемента.");
-            Console.WriteLine("9. Удалить элемент из листа.");
-            Console.WriteLine("10. Очистка листа.");
-            Console.WriteLine("11. Вывод листа.");
+            Console.WriteLine("9. Изменить размер массива.");
+            Console.WriteLine("10. Очистка массива.");
+            Console.WriteLine("11. Вывод массива.");
             Console.WriteLine("12. Выход.");
             Console.WriteLine();
             Console.WriteLine();
@@ -93,10 +92,10 @@ namespace ConsoleApp1
             int number = check_p1();
             switch (number)
             {
-                //1. Длина листа.
+                //1. Длина массива.
                 case 1:
                     Console.Clear();
-                    Console.WriteLine($"Длина вашего листа = {my_list.Count}");
+                    Console.WriteLine($"Длина вашего массива = {my_arr.Length}");
                     Back();
                     break;
                 //2. Поиски элементов с условием.
@@ -128,12 +127,12 @@ namespace ConsoleApp1
                             Console.Clear();
                             if (search == "2.1" || search == "1")
                             {
-                                var a = my_list.Find(i => Convert.ToInt32(i) > digit);
+                                var a = Array.Find<Int32>((int[]) my_arr, i => Convert.ToInt32(i) > digit);
                                 Console.WriteLine($"Ответ: {a}");
                             }
                             else if (search == "2.2" || search == "2")
                             {
-                                var b = my_list.FindAll(i => i > digit);
+                                var b = Array.FindAll<Int32>((int[]) my_arr, i => i > digit);
                                 Console.Write("Ответ: ");
                                 foreach (var i in b)
                                 {
@@ -143,7 +142,7 @@ namespace ConsoleApp1
                             }
                             else if (search == "2.3" || search == "3")
                             {
-                                var c = my_list.FindLast(i => i > digit);
+                                var c = Array.FindLast<Int32>((int[]) my_arr, i => i > digit);
                                 Console.WriteLine($"Ответ: {c}");
                             }
                             else
@@ -156,12 +155,12 @@ namespace ConsoleApp1
                             Console.Clear();
                             if (search == "2.1" || search == "1")
                             {
-                                var a = my_list.Find(i => i < digit);
+                                var a = Array.Find<Int32>((int[])my_arr, i => i < digit);
                                 Console.WriteLine($"Ответ: {a}");
                             }
                             else if (search == "2.2" || search == "2")
                             {
-                                var b = my_list.FindAll(i => i < digit);
+                                var b = Array.FindAll<Int32>((int[])my_arr, i => i < digit);
                                 Console.Write("Ответ:");
                                 foreach (var i in b)
                                 {
@@ -171,7 +170,7 @@ namespace ConsoleApp1
                             }
                             else if (search == "2.3" || search == "3")
                             {
-                                var c = my_list.FindLast(i => i < digit);
+                                var c = Array.FindLast< Int32 >((int[]) my_arr, i => i < digit);
                                 Console.WriteLine($"Ответ: {c}");
                             }
                             else
@@ -183,12 +182,12 @@ namespace ConsoleApp1
                         case "=" or "3" or "3.=":
                             if (search == "2.1" || search == "1")
                             {
-                                var a = my_list.Find(i => i == digit);
+                                var a = Array.Find<Int32>((int[]) my_arr, i => i == digit);
                                 Console.WriteLine($"Ответ: {a}");
                             }
                             else if (search == "2.2" || search == "2")
                             {
-                                var b = my_list.FindAll(i => i == digit);
+                                var b = Array.FindAll<Int32>((int[]) my_arr, i => i == digit);
                                 Console.Write("Ответ: ");
                                 foreach (int i in b)
                                 {
@@ -198,7 +197,7 @@ namespace ConsoleApp1
                             }
                             else if (search == "2.3" || search == "3")
                             {
-                                var c = my_list.FindLast(i => i == digit);
+                                var c = Array.Find<Int32>((int[]) my_arr, i => i == digit);
                                 Console.WriteLine($"Ответ: {c}");
                             }
                             else
@@ -215,77 +214,63 @@ namespace ConsoleApp1
                     break;
 
 
-                //3. Добавить элемент в лист.
+                //3. Узнать значение элемента под определенным индексом.
                 case 3:
                     Console.Clear();
-                    Console.WriteLine("Введите значение, которое желаете добавить в список:");
-                    my_list.Add(check_p1());
+                    Console.WriteLine("Введите индекс элемента, который хотите найти.");
+                    int index = check_p1();
                     DoubleEnter();
-                    Console.WriteLine("Значение было успешно добавлено.");
+                    try
+                    {
+                        Console.WriteLine($"Ответ: {my_arr.GetValue(index)}");
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Номер введенного вами индекса превышет размерность массива.");
+                    }
                     Back();
                     break;
-                //4. Отсортировать лист.
+                //4. Отсортировать массив.
                 case 4:
                     Console.Clear();
-                    my_list.Sort();
-                    Console.WriteLine("Ваш отсортированный лист:");
+                    Array.Sort(my_arr);
+                    Console.WriteLine("Ваш отсортированный массив:");
                     DoubleEnter();
-                    Program.Values(my_list);
+                    Program.Values(my_arr);
                     DoubleEnter();
                     Back();
                     break;
-                //5. Изменить последовательность листа на обратную.
+                //5. Изменить последовательность массива на обратную.
                 case 5:
                     Console.Clear();
-                    my_list.Reverse();
-                    Console.WriteLine("Ваш лист, элементы которого расположены в обратном порядке:");
+                    Array.Reverse(my_arr);
+                    Console.WriteLine("Ваш массив элементы которого расположены в обратном порядке:");
                     DoubleEnter();
-                    Program.Values(my_list);
+                    Program.Values(my_arr);
                     DoubleEnter();
                     Back();
                     break;
                 //6. Бинарный поиск.
                 case 6:
                     Console.Clear();
-                    int[] arr = new int[my_list.Count];
-                    my_list.CopyTo(arr);
+                    int[] arr = new int[my_arr.Length];
+                    Array.Copy(my_arr, arr, my_arr.Length);
                     Array.Sort(arr);
-                    List<int> my_sorted_list = new List<int>();
-                    for (int i = 0; i < arr.Length;i++)
-                    {
-                        my_sorted_list.Add(arr[i]);
-                    }
                     Console.WriteLine("Ниже введите элемент, который хотите найти.");
                     int s = check_p1();
                     DoubleEnter();
-                    count = my_sorted_list.BinarySearch(s);
-                    if (count >= 0)
-                    {
-                        Console.WriteLine($"Индекс элемента в отсортированном списке = {count}");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Элемент не найден.");
-                    }
+                    Console.WriteLine($"Ответ: {Array.BinarySearch(my_arr, s)}");
                     Back();
                     break;
                 //7. Изменить значение элемента под определенным номером.
                 case 7:
                     Console.Clear();
-                    Console.WriteLine("Ниже введите индекс элемента, который хотите изменить:");
-                    int ind = check_p1();
-                    Console.WriteLine("Ниже введите значение, на которое хотите заменить:");
-                    int new_value = check_p1();
-                    if (ind < my_list.Count)
-                    {
-                        my_list.Insert(ind, new_value);
-                        DoubleEnter();
-                        Program.Values(my_list);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Индекс элемента превышает текущую размерность листа.");
-                    }
+                    Console.WriteLine("Ниже введите индекс элемента, который хотите изменить и через пробел значение, на которое хотите заменить.");
+                    string[] replace = Console.ReadLine().Split(' ');
+                    my_arr.SetValue(Convert.ToInt32(replace[1]), Convert.ToInt32(replace[0]));
+                    DoubleEnter();
+                    Console.WriteLine("Ваш измененный массив:");
+                    Program.Values(my_arr);
                     DoubleEnter();
                     Back();
                     break;
@@ -304,21 +289,21 @@ namespace ConsoleApp1
                     switch (num)
                     {
                         case "8.1" or "1":
-                            int index = my_list.IndexOf(value);
-                            if (index < 0)
+                            int ind = Array.IndexOf(my_arr, value);
+                            if (ind < 0)
                             {
-                                Console.WriteLine("Такого элемента нет в листе.");
+                                Console.WriteLine("Такого элемента нет в массиве.");
                             }
                             else
                             {
-                                Console.WriteLine($"Ответ: {index}");
+                                Console.WriteLine($"Ответ: {ind}");
                             }
                             break;
                         case "8.2" or "2":
-                            int i = my_list.LastIndexOf(value);
+                            int i = Array.LastIndexOf(my_arr, value);
                             if (i < 0)
                             {
-                                Console.WriteLine("Такого элемента нет в листе.");
+                                Console.WriteLine("Такого элемента нет в массиве.");
                             }
                             else
                             {
@@ -331,99 +316,34 @@ namespace ConsoleApp1
                             break;
                     }
                     break;
-                //9. Удалить элемент из листа.
+                //9. Изменить размер массива.
                 case 9:
                     Console.Clear();
-                    Console.WriteLine("9.1 Удалить первое вхождение указанного числа из листа");
-                    Console.WriteLine("9.2 Удалить все элементы, удовлетворяющие условиям указанного предиката.");
-                    Console.WriteLine("9.3 Удалить элемент списка с указанным индексом.");
+                    Console.WriteLine("Введите новую размерность массива.");
+                    int dim = check_p1();
+                    int[] ar = new int[my_arr.Length];
+                    Array.Copy(my_arr, ar, my_arr.Length);
+                    Array.Resize(ref ar, dim);
+                    my_arr = ar;
                     DoubleEnter();
-                    Console.WriteLine("Ниже введите номер интересующего вас пункта.");
-                    string ch = Console.ReadLine();
-                    int znach = 0;
-                    switch(ch)
-                    {
-                        case "9.1" or "1":
-                            Console.Clear();
-                            Console.WriteLine("Ниже введите значение элемента, которое хотите удалить из списка:");
-                            znach = check_p1();
-                            if (my_list.Contains(znach))
-                            {
-                                Console.WriteLine();
-                                my_list.Remove(znach);
-                                Console.WriteLine("Значение было успешно удалено.");
-                            }
-                            else
-                            {
-                                Console.WriteLine();
-                                Console.WriteLine("Такого значения в листе не существует.");
-                            }
-                            
-                            DoubleEnter();
-                            Back();
-                            break;
-
-                        case "9.2" or "2":
-                            Console.Clear();
-                            Console.WriteLine("Ниже введите вид условия из перечисленных, который вас интересует.");
-                            Console.WriteLine("1.>");
-                            Console.WriteLine("2.<");
-                            Console.WriteLine("3.=");
-                            DoubleEnter();
-
-                            condition = Op();
-                            DoubleEnter();
-                            Console.WriteLine("Ниже введите число, создающее условие.");
-                            digit = check_p1();
-                            switch(condition)
-                            {
-                                case ">":
-                                    my_list.RemoveAll(i => i>digit);
-                                    break; 
-                                case "<":
-                                    my_list.RemoveAll(i => i < digit);
-                                    break;
-                                case "=":
-                                    my_list.RemoveAll(i => i == digit);
-                                    break;
-                            }
-
-                            Console.WriteLine($"Числа, удовлетворяющие условию {condition}{digit}, успешно удалены.");
-                            DoubleEnter();
-                            break;
-                        case "9.3" or "3":
-                            Console.Clear();
-                            Console.WriteLine("Ниже введите индекс элемента, который желаете удалить:");
-                            ind = check_p1();
-                            try
-                            {
-                                my_list.RemoveAt(ind);
-                                Console.WriteLine($"Элемент под индексом №{ind} был успешно удален.");
-                            }
-                            catch
-                            {
-                                Console.WriteLine("Индекс превышает текущую размерность листа.");
-                            }
-                            break;
-                        default:
-                            Console.WriteLine("Номер пункта был введен неверно");
-                            break;
-                    }
+                    Console.WriteLine("Ваш измененный массив:");
+                    Program.Values(my_arr);
                     DoubleEnter();
                     Back();
                     break;
-                //10. Очистка листа.
+                //10. Очистка массива.
                 case 10:
                     Console.Clear();
-                    my_list.Clear();
-                    Console.WriteLine("Ваш лист был успешно очищен.");
+                    Array.Clear(my_arr);
+                    Console.WriteLine("Ваш массив был успешно очищен.");
                     DoubleEnter();
                     Back();
                     break;
-                //Вывод листа
+                //Вывод массива
                 case 11:
                     Console.Clear();
-                    Program.Values(my_list);
+                    Console.WriteLine("Ваш массив:");
+                    Program.Values(my_arr);
                     break;
                 //12. Выход.
                 case 12:
