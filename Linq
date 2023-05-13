@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+class Maze
+{
+    static void Main()
+    {
+        int n = Convert.ToInt32(Console.ReadLine());
+        int[] mass = new int[n];
+        for (int i  = 0; i<n; i++)
+        {
+            mass[i] = Convert.ToInt32(Console.ReadLine());
+        }
+
+        var negative = from m in mass
+                       where m < 0
+                       select m;
+
+        var pozitive = from m in mass
+                       where m > 0
+                       select m;
+
+        var even = from m in mass
+                       where m % 2 == 0
+                       select m;
+
+        int mult = 1;
+        Console.WriteLine("Количество отрицательных чисел массива = " + negative.ToList().Count);
+        Console.WriteLine("Сумма положительных элементов = " + pozitive.Sum());
+        if (even.ToList().Count == 0)
+        {
+            Console.WriteLine("В массиве нет четных элементов");
+        }
+        else
+        {
+            foreach(int i in even.ToList())
+            {
+                mult *= i;
+            }
+            Console.WriteLine(mult);
+        }
+ 
+    }
+}
