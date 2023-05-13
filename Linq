@@ -37,7 +37,7 @@ class Maze
             {
                 mult *= i;
             }
-            Console.WriteLine(mult);
+            Console.WriteLine("Произведение четных элемнтов = " + mult);
         }
  
     }
