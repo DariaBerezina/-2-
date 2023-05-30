@@ -1,0 +1,22 @@
+using System;
+using System.Text;
+using System.IO;
+using System.Collections.Generic;
+using qwerty;
+
+namespace ConsoleApplication26
+{
+    class Program
+    {
+        public static string collection_name = "Queue";
+        public static void Main()
+        {
+            Menu.Print();
+        } 
+
+
+    }
+}
+
+       
+   
