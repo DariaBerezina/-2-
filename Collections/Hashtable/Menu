@@ -1,0 +1,70 @@
+using ConsoleApplication26;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace qwerty
+{
+    internal class Menu
+    {
+        static Hashtable coll = new Hashtable();
+        public static void DEnter()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+        public static void Print()
+        {
+            Console.WriteLine($"Добро пожаловать в реализацию методов колекции {Program.collection_name}");
+            DEnter();
+            Console.WriteLine("1. Add ");
+            Console.WriteLine("2. Clear ");
+            Console.WriteLine("3. GetHash ");
+            Console.WriteLine("4. Remove ");
+            Console.WriteLine("5. CopyTo ");
+            Console.WriteLine("6. ContainsValue ");
+            Console.WriteLine("7. ContainsKey ");
+            Console.WriteLine("8. Просмотреть элементы коллекции ");
+            Console.WriteLine("9. Выход ");
+            DEnter();
+            Console.Write("Введите номер интересующего Вас пункта: ");
+            int option = Protect.ToInt(Console.ReadLine());
+
+            switch (option)
+            {
+                case 1:/*Add*/
+                    Methods.add(ref coll);
+                    break;
+                case 2:/* Clear*/
+                    Methods.clear(ref coll);
+                    break; 
+                case 3:/* GetHashCode*/
+                    Methods.getHashCode(ref coll);
+                    break;
+                case 4:/*Remove*/
+                    Methods.remove(ref coll);
+                    break;
+                case 5:/*CopyTo*/
+                    Methods.copyTo(ref coll);
+                    break;
+                case 6:/*ContainsValue*/
+                    Methods.containsValue(ref coll);
+                    break;
+                case 7:/*ContainsKey*/
+                    Methods.containsKey(ref coll);
+                    break;
+                case 8:/*Просмотреть элементы коллекции*/
+                    Methods.PrintValues(ref coll);
+                    break;
+                case 9:/*Выход*/
+                    Environment.Exit(0);
+                    break;
+
+            }
+        }
+
+    }
+}
