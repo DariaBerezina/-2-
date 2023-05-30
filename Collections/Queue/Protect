@@ -1,0 +1,43 @@
+using System;
+
+
+namespace qwerty
+{
+    internal class Protect
+    {
+        private static bool ToInt_Bool(string str)
+        {
+           try
+            {
+                int Int = Convert.ToInt32(str);
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+        }
+        public static int ToInt(string str)
+        {
+            while(!ToInt_Bool(str))
+            {
+                Console.WriteLine("Введенная комбинация символов не является числом!");
+                Console.Write("Повторите попытку ввода: ");
+                str = Console.ReadLine(); 
+            }
+            return Convert.ToInt32(str);
+        }
+
+        public static string NotNull(string str)
+        {
+            while (str == null)
+            {
+                Console.WriteLine("Недопустимое значение!");
+                Console.Write("Повторите попытку ввода: ");
+                str = Console.ReadLine();
+
+            }
+            return str; 
+        }
+    }
+}
