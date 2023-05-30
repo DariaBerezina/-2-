@@ -1,0 +1,122 @@
+using ConsoleApplication26;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace qwerty
+{
+    internal class Methods
+    {
+        private static void Back()
+        {
+            Menu.DEnter();
+            Console.Write("Нажмите любую клавишу для возвращения к меню...");
+            Console.ReadKey();
+            Console.Clear();
+            Menu.Print();
+        }
+        public static Hashtable create()
+        {
+            Hashtable ht = new Hashtable();
+
+            return ht;
+        }
+        public static void add(ref Hashtable ht)
+        {
+            Console.Write("Введите ключ: ");
+            string key = Protect.NotNull(Console.ReadLine());
+            Console.Write("Введите значение: ");
+            string value = Console.ReadLine();
+            try
+            {
+                ht.Add(key, value);
+            }
+            catch
+            {
+                Console.WriteLine("Данная комбинация значений уже содержится в таблице!");
+            }
+            PrintValues(ref ht);
+            Back();
+
+        }
+        public static void clear(ref Hashtable ht)
+        {
+            ht.Clear();
+            Console.WriteLine("Коллекция была успешно очищенна!");
+            Back();
+        }
+        public static void getHashCode(ref Hashtable ht)
+        {
+            Console.WriteLine("Результат метода: " + ht.GetHashCode());
+            Back();
+        }
+        public static void remove(ref Hashtable ht)
+        {
+            Console.Write("Введите ключ, который хотите удалить: ");
+            string del = Console.ReadLine();
+            if (ht.ContainsKey(del))
+            {
+                ht.Remove(del);
+                Console.WriteLine("Элемент был успешно удален!");
+                Back();
+            }
+            else
+            {
+                Console.WriteLine("Такого ключа нет в коллекции:/");
+                Back();
+            }
+        }
+        public static void copyTo(ref Hashtable ht)
+        {
+            string[] arr = new string[ht.Count];
+            ht.CopyTo(arr, 0);
+            Console.WriteLine("Коллекцция была успешно скопированна в массив!");
+            Back();
+        }
+        public static void containsValue(ref Hashtable ht)
+        {
+            Console.Write("Введите значение, наличие которого в коллекции в хотите проверить: ");
+            string value = Console.ReadLine() ;
+            Menu.DEnter();
+            if (ht.ContainsValue(value))
+            {
+                Console.WriteLine("Значение имеется в коллекции.");
+            }
+            else
+            {
+                Console.WriteLine("Такого элемента в коолекции нет.");
+            }
+            Back();
+        }
+        public static void containsKey(ref Hashtable ht)
+        {
+            Console.Write("Введите ключ, наличие которого в коллекции в хотите проверить: ");
+            string key = Console.ReadLine();
+            Menu.DEnter();
+            if (ht.ContainsKey(key))
+            {
+                Console.WriteLine("Ключ имеется в коллекции.");
+            }
+            else
+            {
+                Console.WriteLine("Такого ключа в коолекции нет.");
+            }
+            Back();
+        }
+        public static void PrintValues(ref Hashtable ht)
+        {
+            foreach (DictionaryEntry de in ht)
+            {
+                Console.WriteLine("Key = {0}, Value = {1}", de.Key, de.Value);
+            }
+            Console.WriteLine();
+            Back();
+        }
+    }
+}
+
+
+
