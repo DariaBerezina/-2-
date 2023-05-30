@@ -1,0 +1,94 @@
+using ConsoleApplication26;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace qwerty
+{
+    internal class Methods
+    {
+        private static void Back()
+        {
+            Menu.DEnter();
+            Console.Write("Нажмите любую клавишу для возвращения к меню...");
+            Console.ReadKey();
+            Console.Clear();
+            Menu.Print();
+        }
+        public static void enqueue(ref Queue coll)
+        {
+            Console.Write("Введите элемент, который хотите добавить:  ");
+            coll.Enqueue(Protect.NotNull(Console.ReadLine()));
+            Menu.DEnter();
+            Console.WriteLine("Элемент был успешно добавлен в коллекцию!");
+            Back();
+
+        }
+        public static void clear(ref Queue coll)
+        {
+            coll.Clear();
+            Console.WriteLine("Коллекция была успешно очищенна!");
+            Back();
+        }
+        public static void getHashCode(ref Queue coll)
+        {
+            Console.WriteLine("Результат метода: " + coll.GetHashCode());
+            Back();
+        }
+        public static void dequeue(ref Queue coll)
+        {
+            Console.WriteLine($"Элемент из начала очереди = {coll.Dequeue()} был успешно удален!");
+            Back();
+        }
+        public static void copyTo(ref Queue coll)
+        {
+            string[] arr = new string[coll.Count];
+            coll.CopyTo(arr, 0);
+            Console.WriteLine("Коллекцция была успешно скопированна в массив!");
+            Back();
+        }
+        public static void contains(ref Queue coll)
+        {
+            Console.Write("Введите значение, наличие которого в коллекции в хотите проверить: ");
+            string value = Console.ReadLine() ;
+            Menu.DEnter();
+            if (coll.Contains(value))
+            {
+                Console.WriteLine("Значение имеется в коллекции.");
+            }
+            else
+            {
+                Console.WriteLine("Такого элемента в коолекции нет.");
+            }
+            Back();
+        }
+        public static void peek(ref Queue coll)
+        {
+            Console.WriteLine($"Объект, находящийся в начале очереди = {coll.Peek()}");
+            Back();
+        }
+        public static void trimToSize(ref Queue coll)
+        {
+            coll.TrimToSize();
+            Console.WriteLine($"Значение емкости теперь равно действительному количеству элементов в коллекции!");
+            Back();
+        }
+
+        public static void PrintValues(ref Queue coll)
+        {
+            System.Collections.IEnumerator enumerator = coll.GetEnumerator();
+            Console.WriteLine("Ваша коллекция:");
+            while (enumerator.MoveNext())
+            {
+                Console.Write("\t{0}", enumerator.Current);
+            }
+            Back();
+        }
+    }
+}
+
+
+
