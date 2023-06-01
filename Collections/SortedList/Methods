@@ -1,0 +1,160 @@
+using ConsoleApplication26;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ConsoleApplication26;
+
+namespace ConsoleApplication26
+{
+    internal class Methods
+    {
+        private static void Back()
+        {
+            Menu.DEnter();
+            Console.Write("Нажмите любую клавишу для возвращения к меню...");
+            Console.ReadKey();
+            Console.Clear();
+            Menu.Print();
+        }
+        public static void add(ref SortedList coll)
+        {
+            Console.Write("Введите ключ элемента, который хотите добавить:  ");
+            string key = Protect.NotNull(Console.ReadLine());
+            Console.Write("Введите значение элемента, который хотите добавить:  ");
+            string value = Protect.NotNull(Console.ReadLine());
+            coll.Add(key, value);
+            Menu.DEnter();
+            Console.WriteLine("Элемент был успешно добавлен в коллекцию!");
+            Back();
+
+        }
+        public static void remove(ref SortedList coll)
+        {
+            Console.Write("Введите ключ элемента, который хотите удалить:  ");
+            string key = Protect.NotNull(Console.ReadLine());
+            if (coll.ContainsKey(key))
+            {
+                coll.Remove(key);
+                Console.WriteLine("Ключ был успешно удален!");
+            }
+            else 
+            {
+                Console.WriteLine("Такого ключа нет в коллеции!");
+            }
+            Back();
+        }
+        public static void getKey(ref SortedList coll)
+        {
+            Console.Write("Введите индекс, ключ которого хотите получить:  ");
+            int index = Protect.ToInt(Console.ReadLine());
+            if (index < coll.Count)
+            {
+                Console.WriteLine("Ключ, расположенный по идексу " + index + " = " + coll.GetKey(index));
+            }
+            else
+            {
+                Console.WriteLine("Некорректный индекс!");
+            }
+            Back();
+        }
+        public static void getByIndex(ref SortedList coll)
+        {
+            Console.Write("Введите индекс, значение которого хотите получить:  ");
+            int index = Protect.ToInt(Console.ReadLine());
+            if (index < coll.Count)
+            {
+                Console.WriteLine("Значение, расположенное по идексу " + index + " = " + coll.GetByIndex(index)); 
+            }
+            else
+            {
+                Console.WriteLine("Некорректный индекс!");
+            }
+            Back();
+        }
+        public static void indexOfKey(ref SortedList coll)
+        {
+            Console.Write("Введите ключ, индекс которого хотите получить:  ");
+            string key = Protect.NotNull(Console.ReadLine());
+            int nal = coll.IndexOfKey(key);
+            if (nal != -1)
+            {
+                Console.WriteLine("Индекс элемента, ключ которого вы указали, = " + coll.IndexOfKey(key));
+            }
+            else
+            {
+                Console.WriteLine("Такого ключа нет в колекции!");
+            }
+            Back();
+        }
+        public static void indexOfValue(ref SortedList coll)
+        {
+            Console.Write("Введите значение, индекс которого хотите получить:  ");
+            string value = Protect.NotNull(Console.ReadLine());
+            int nal = coll.IndexOfValue(value);
+            if (nal != -1)
+            {
+                Console.WriteLine("Индекс элемента, значение которого вы указали, = " + coll.IndexOfValue(value));
+            }
+            else
+            {
+                Console.WriteLine("Такого значения нет в колекции!");
+            }
+            Back();
+        }
+        public static void clear(ref SortedList coll)
+        {
+            coll.Clear();
+            Console.WriteLine("Коллекция была успешно очищенна!");
+            Back();
+        }
+        public static void containsKey(ref SortedList coll)
+        {
+            Console.Write("Введите ключ элемента, наличие которого хотите проверить:  ");
+            string key = Protect.NotNull(Console.ReadLine());
+            if (coll.ContainsKey(key))
+            {
+                Console.WriteLine("Ключ имеется в коллекции!");
+            }
+            else
+            {
+                Console.WriteLine("Такого ключа нет в коллекции!");
+            }
+            Back();
+        }
+        public static void containsValue(ref SortedList coll)
+        {
+            Console.Write("Введите значение элемента, наличие которого хотите проверить:  ");
+            string value = Protect.NotNull(Console.ReadLine());
+            if (coll.ContainsValue(value))
+            {
+                Console.WriteLine("Значение имеется в коллекции!");
+            }
+            else
+            {
+                Console.WriteLine("Такого значения нет в коллекции!");
+            }
+            Back();
+        }
+
+        public static void getHashCode(ref SortedList coll)
+        {
+            Console.WriteLine("Хэш-код: " + coll.GetHashCode());
+            Back();
+        }
+
+        public static void PrintValues(ref SortedList coll)
+        {
+           foreach (DictionaryEntry de in coll)
+            {
+                Console.WriteLine("Key = {0}, Value = {1}", de.Key, de.Value);
+            }
+            Console.WriteLine();
+            Back();
+        }
+    }
+}
+
+
