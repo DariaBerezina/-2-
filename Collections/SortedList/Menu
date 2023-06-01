@@ -1,0 +1,83 @@
+using ConsoleApplication26;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ConsoleApplication26;
+
+namespace ConsoleApplication26
+{
+    internal class Menu
+    {
+        static SortedList coll = new SortedList();
+        public static void DEnter()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+        public static void Print()
+        {
+            Console.WriteLine("Добро пожаловать в реализацию методов колекции " + Program.collection_name);
+            DEnter();
+            Console.WriteLine("1. Add ");
+            Console.WriteLine("2. GetHashCode ");
+            Console.WriteLine("3. ContainsKey ");
+            Console.WriteLine("4. ContainsValue ");
+            Console.WriteLine("5. GetKeyAtIndex ");
+            Console.WriteLine("6. GetValueAtIndex ");
+            Console.WriteLine("7. IndexOfKey ");
+            Console.WriteLine("8. IndexOfValue ");
+            Console.WriteLine("9. Remove ");
+            Console.WriteLine("10. Clear ");
+            Console.WriteLine("11. Просмотреть элементы коллекции ");
+            Console.WriteLine("12. Выход ");
+            DEnter();
+            Console.Write("Введите номер интересующего Вас пункта: ");
+            int option = Protect.ToInt(Console.ReadLine());
+
+            switch (option)
+            {
+                case 1:/*Add*/
+                    Methods.add(ref coll);
+                    break;
+                case 2: /*GetHashCode*/
+                    Methods.getHashCode(ref coll);
+                    break;
+                case 3: //ContainsKey
+                    Methods.containsKey(ref coll);
+                    break;
+                case 4: /*ContainsValue*/
+                    Methods.containsValue(ref coll);
+                    break;
+                case 5: /*getKey*/
+                    Methods.getKey(ref coll);
+                    break;
+                case 6: /*GetByIndex*/
+                    Methods.getByIndex(ref coll);
+                    break;
+                case 7:/*IndexOfKey*/
+                    Methods.indexOfKey(ref coll);
+                    break;
+                case 8:/*IndexOfValue*/
+                    Methods.indexOfValue(ref coll);
+                    break;
+                case 9:/*Remove*/
+                    Methods.remove(ref coll);
+                    break;
+                case 10:/*Clear*/
+                    Methods.clear(ref coll);
+                    break;
+                case 11:/*Просмотреть элементы коллекции*/
+                    Methods.PrintValues(ref coll);
+                    break;
+                case 12:/*Выход*/
+                    Environment.Exit(0);
+                    break;
+
+            }
+        }
+
+    }
+}
