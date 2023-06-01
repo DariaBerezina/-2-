@@ -1,0 +1,93 @@
+using ConsoleApplication26;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ConsoleApplication26;
+
+namespace ConsoleApplication26
+{
+    internal class Methods
+    {
+        private static void Back()
+        {
+            Menu.DEnter();
+            Console.Write("Нажмите любую клавишу для возвращения к меню...");
+            Console.ReadKey();
+            Console.Clear();
+            Menu.Print();
+        }
+        public static void push(ref Stack coll)
+        {
+            Console.Write("Введите элемент, который хотите добавить:  ");
+            coll.Push(Protect.NotNull(Console.ReadLine()));
+            Menu.DEnter();
+            Console.WriteLine("Элемент был успешно добавлен в коллекцию!");
+            Back();
+
+        }
+        public static void getHashCode(ref Stack coll)
+        {
+            Console.WriteLine("Результат метода: " + coll.GetHashCode());
+            Back();
+        }
+        public static void peek(ref Stack coll)
+        {
+            Console.WriteLine("Элемент, который находится в начале коллекции = " + coll.Peek() );
+            Back();
+        }
+        public static void pop(ref Stack coll)
+        {
+           Console.WriteLine("Элемент, который находится в начале коллекции = " + coll.Pop() + " был успешно удален!");
+            Back();
+        }
+        public static void clear(ref Stack coll)
+        {
+            coll.Clear();
+            Console.WriteLine("Коллекция была успешно очищенна!");
+            Back();
+        }
+        
+        public static void count(ref Stack coll)
+        {
+            Console.WriteLine("Длина коллекции  =  " + coll.Count);
+            Back();
+        }
+        public static void copyTo(ref Stack coll)
+        {
+            string[] arr = new string[coll.Count];
+            coll.CopyTo(arr, 0);
+            Console.WriteLine("Коллекцция была успешно скопированна в массив!");
+            Back();
+        }
+        public static void contains(ref Stack coll)
+        {
+            Console.Write("Введите значение, наличие которого в коллекции в хотите проверить: ");
+            string value = Console.ReadLine() ;
+            Menu.DEnter();
+            if (coll.Contains(value))
+            {
+                Console.WriteLine("Значение имеется в коллекции.");
+            }
+            else
+            {
+                Console.WriteLine("Такого элемента в коолекции нет.");
+            }
+            Back();
+        }
+        public static void PrintValues(ref Stack coll)
+        {
+            System.Collections.IEnumerator enumerator = coll.GetEnumerator();
+            Console.WriteLine("Ваша коллекция:");
+            while (enumerator.MoveNext())
+            {
+                Console.Write("\t{0}", enumerator.Current);
+            }
+            Back();
+        }
+    }
+}
+
+
