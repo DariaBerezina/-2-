@@ -1,0 +1,119 @@
+using ConsoleApplication26;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ConsoleApplication26;
+
+namespace ConsoleApplication26
+{
+    internal class Methods
+    {
+        private static void Back()
+        {
+            Menu.DEnter();
+            Console.Write("Нажмите любую клавишу для возвращения к меню...");
+            Console.ReadKey();
+            Console.Clear();
+            Menu.Print();
+        }
+        public static void add(ref Dictionary<string, string> coll)
+        {
+            Console.Write("Введите ключ элемента, который хотите добавить:  ");
+            string key = Protect.NotNull(Console.ReadLine());
+            Console.Write("Введите значение элемента, который хотите добавить:  ");
+            string value = Protect.NotNull(Console.ReadLine());
+            coll.Add(key, value);
+            Menu.DEnter();
+            Console.WriteLine("Элемент был успешно добавлен в коллекцию!");
+            Back();
+
+        }
+        public static void clear(ref Dictionary<string, string> coll)
+        {
+            coll.Clear();
+            Console.WriteLine("Коллекция была успешно очищенна!");
+            Back();
+        }
+        public static void tryGetValue(ref Dictionary<string, string> coll)
+        {
+            Console.Write("Введите ключ элемента, значение которого хотите получить:  ");
+            string key = Protect.NotNull(Console.ReadLine());
+            string value = String.Empty;
+            if (coll.TryGetValue(key, out value))
+            {
+                Console.WriteLine("Ключ имеется в коллекции и имеет следующее значение: " + value);
+            }
+            else
+            {
+                Console.WriteLine("Такого ключа нет в коллекции!");
+            }
+            Back();
+        }
+        public static void remove(ref Dictionary<string, string> coll)
+        {
+            Console.Write("Введите ключ элемента, который хотите удалить:  ");
+            string key = Protect.NotNull(Console.ReadLine());
+            if (coll.ContainsKey(key))
+            {
+                coll.Remove(key);
+                Console.WriteLine("Элемент был успешно удален!");
+            }
+            else
+            {
+                Console.WriteLine("Такого ключа нет в коллекции!");
+            }
+            Back();
+        }
+        public static void containsKey(ref Dictionary<string, string> coll)
+        {
+            Console.Write("Введите ключ элемента, который хотите проверить на наличие:  ");
+            string key = Protect.NotNull(Console.ReadLine());
+            Menu.DEnter();
+            if (coll.ContainsKey(key))
+            {
+                Console.WriteLine("Ключ имеется в коллекции!");
+            }
+            else
+            {
+                Console.WriteLine("Такого ключа нет в коллекции!");
+            }
+            Back();
+        }
+        public static void containsValue(ref Dictionary<string, string> coll)
+        {
+            Console.Write("Введите значение, наличие которого в коллекции в хотите проверить: ");
+            string value = Console.ReadLine() ;
+            Menu.DEnter();
+            if (coll.ContainsValue(value))
+            {
+                Console.WriteLine("Значение имеется в коллекции.");
+            }
+            else
+            {
+                Console.WriteLine("Такого элемента в коолекции нет.");
+            }
+            Back();
+        }
+        public static void getHashCode(ref Dictionary<string, string> coll)
+        {
+            Console.WriteLine("Хэш-код: " + coll.GetHashCode());
+            Back();
+        }
+
+        public static void PrintValues(ref Dictionary<string, string> coll)
+        {
+            System.Collections.IEnumerator enumerator = coll.GetEnumerator();
+            Console.WriteLine("Ваша коллекция:");
+            while (enumerator.MoveNext())
+            {
+                Console.Write("\t{0}", enumerator.Current);
+            }
+            Back();
+        }
+    }
+}
+
+
