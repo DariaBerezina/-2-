@@ -1,0 +1,75 @@
+using ConsoleApplication26;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ConsoleApplication26;
+
+namespace ConsoleApplication26
+{
+    internal class Menu
+    {
+        static Stack coll = new Stack();
+        public static void DEnter()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+        public static void Print()
+        {
+            Console.WriteLine("Добро пожаловать в реализацию методов колекции " + Program.collection_name);
+            DEnter();
+            Console.WriteLine("1. Push ");
+            Console.WriteLine("2. GetHashCode ");
+            Console.WriteLine("3. Peek ");
+            Console.WriteLine("4. Pop ");
+            Console.WriteLine("5. Contains ");
+            Console.WriteLine("6. CopyTo ");
+            Console.WriteLine("7. Clear ");
+            Console.WriteLine("8. Длина коллекции ");
+            Console.WriteLine("9. Просмотреть элементы коллекции ");
+            Console.WriteLine("10. Выход ");
+            DEnter();
+            Console.Write("Введите номер интересующего Вас пункта: ");
+            int option = Protect.ToInt(Console.ReadLine());
+
+            switch (option)
+            {
+                case 1:/*Push*/
+                    Methods.push(ref coll);
+                    break;
+                case 2: /*GetHashCode*/
+                    Methods.getHashCode(ref coll);
+                    break;
+                case 3: //Peek
+                    Methods.peek(ref coll);
+                    break;
+                case 4: /*Pop*/
+                    Methods.pop(ref coll);
+                    break;
+                case 5: /*Contains*/
+                    Methods.contains(ref coll);
+                    break;
+                case 6:/*CopyTo*/
+                    Methods.copyTo(ref coll);
+                    break;
+                case 7:/*Clear*/
+                    Methods.clear(ref coll);
+                    break;
+                case 8: /*длина*/
+                    Methods.count(ref coll);
+                    break;
+                case 9:/*Просмотреть элементы коллекции*/
+                    Methods.PrintValues(ref coll);
+                    break;
+                case 10:/*Выход*/
+                    Environment.Exit(0);
+                    break;
+
+            }
+        }
+
+    }
+}
