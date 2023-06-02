@@ -1,0 +1,82 @@
+using ConsoleApplication26;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace qwerty
+{
+    internal class Menu
+    {
+        static HashSet<string> coll = new HashSet<string>();
+        public static void DEnter()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+        public static void Print()
+        {
+            Console.WriteLine($"Добро пожаловать в реализацию методов колекции {Program.collection_name}");
+            DEnter();
+            Console.WriteLine("1. Add ");
+            Console.WriteLine("2. EnsureCapacity ");
+            Console.WriteLine("3. Clear ");
+            Console.WriteLine("4. Contains ");
+            Console.WriteLine("5. CopyTo ");
+            Console.WriteLine("6. RemoveWhere ");
+            Console.WriteLine("7. TryGetValue ");
+            Console.WriteLine("8. Remove ");
+            Console.WriteLine("9. TrimExcess ");
+            Console.WriteLine("10. Длина ");
+            Console.WriteLine("11. Просмотреть элементы коллекции ");
+            Console.WriteLine("12. Выход ");
+            DEnter();
+            Console.Write("Введите номер интересующего Вас пункта: ");
+            int option = Protect.ToInt(Console.ReadLine());
+
+            switch (option)
+            {
+                case 1:/*Add*/
+                    Methods.add(ref coll);
+                    break;
+                case 2: /*EnsureCapacity*/
+                    Methods.enshureCapacity(ref coll);
+                    break;
+                case 3: /*Clear*/
+                    Methods.clear(ref coll);
+                    break;
+                case 4: /*Contains*/
+                    Methods.contains(ref coll);
+                    break;
+                case 5: /*CopyTo*/
+                    Methods.copyTo(ref coll);
+                    break;
+                case 6: /*RemoveWhere*/
+                    Methods.removeWhere(ref coll);
+                    break;
+                case 7:/*TryGetValue*/
+                    Methods.tryGetValue(ref coll);
+                    break;
+                case 8:/*Remove*/
+                    Methods.remove(ref coll);
+                    break;
+                case 9:/*TrimExcess*/
+                    Methods.trimExcess(ref coll);
+                    break;
+                case 10:/*Длина*/
+                    Methods.count(ref coll);
+                    break;
+                case 11:/*Просмотреть элементы коллекции*/
+                    Methods.PrintValues(ref coll);
+                    break;
+                case 12:/*Выход*/
+                    Environment.Exit(0);
+                    break;
+
+            }
+        }
+
+    }
+}
