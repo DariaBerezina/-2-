@@ -1,0 +1,152 @@
+using ConsoleApplication26;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Dynamic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace qwerty
+{
+    internal class Methods
+    {
+        private static void Back()
+        {
+            Menu.DEnter();
+            Console.Write("Нажмите любую клавишу для возвращения к меню...");
+            Console.ReadKey();
+            Console.Clear();
+            Menu.Print();
+        }
+        public static void add(ref HashSet<string> coll)
+        {
+            Console.Write("Введите элемент, который хотите добавить: ");
+            coll.Add(Protect.NotNull(Console.ReadLine()));
+            Back();
+        }
+        public static void clear(ref HashSet<string> coll)
+        {
+            coll.Clear();
+            Console.WriteLine("Коллекция была успешно очищенна!");
+            Back();
+        }
+        public static void getHashCode(ref HashSet<string>  coll)
+        {
+            Console.WriteLine("Результат метода: " + coll.GetHashCode());
+            Back();
+        }
+        public static void enshureCapacity(ref HashSet<string> coll)
+        {
+            Console.Write("Введите размерность, которая должна быть установленна обязательно: ");
+            int cap = Protect.ToInt(Console.ReadLine());
+            coll.EnsureCapacity(cap);
+            Menu.DEnter();
+            Console.WriteLine("Введенная вами обязательная размерность была установлена!");
+            Back();
+        }
+        public static void copyTo(ref HashSet<string> coll)
+        {
+            string[] arr = new string[coll.Count];
+            coll.CopyTo(arr, 0);
+            Console.WriteLine("Коллекцция была успешно скопированна в массив!");
+            Back();
+        }
+        public static void contains(ref HashSet<string> coll)
+        {
+            Console.Write("Введите значение, наличие которого в коллекции в хотите проверить: ");
+            string value = Console.ReadLine() ;
+            Menu.DEnter();
+            if (coll.Contains(value))
+            {
+                Console.WriteLine("Значение имеется в коллекции.");
+            }
+            else
+            {
+                Console.WriteLine("Такого элемента в коолекции нет.");
+            }
+            Back();
+        }
+        public static void removeWhere(ref HashSet<string> coll)
+        {
+            Console.WriteLine("1. =");
+            Console.WriteLine("2. !=");
+            Menu.DEnter();
+            Console.Write("Введите номер интересующего Вас условия: ");
+            int option = Protect.ToInt(Console.ReadLine()) ;
+            Menu.DEnter();
+            Console.Write("Введите число, задаюшее условие: ");
+            string cond = Protect.NotNull(Console.ReadLine());
+            switch (option)
+            {
+                case 1:
+                    Console.WriteLine("Количество удаленных элементов = " + coll.RemoveWhere(x => x == cond));
+                    break;
+                case 2:
+                    Console.WriteLine("Количество удаленных элементов = : " + coll.RemoveWhere(x => x != cond));
+                    break;
+            }
+            coll.RemoveWhere(x => x != null);
+            Back();
+        }
+        public static void tryGetValue(ref HashSet<string> coll)
+        {
+            Console.Write("Введите значение, которое хотите получить: ");
+            string value = Protect.NotNull(Console.ReadLine()) ;
+            string out_val = string.Empty;
+            if(coll.TryGetValue(value, out out_val))
+            {
+                Console.WriteLine("Данное значение имеется в коллекции!");
+            }
+            else
+            {
+                Console.WriteLine("Такого значения в коллекии нет!");
+            }
+            Back();
+        }
+        public static void remove(ref HashSet<string> coll)
+        {
+            Console.Write("Введите элемент, который хотите удалить: ");
+            string value = Protect.NotNull(Console.ReadLine());
+            Menu.DEnter();
+            if (coll.Contains(value) )
+            {
+                coll.Remove(value);
+                Console.WriteLine("Элемент был успешно удален!");
+            }
+            else
+            {
+                Console.WriteLine("Элемента нет в коллекции!");
+
+            }
+            Back();
+        }
+        public static void trimExcess(ref HashSet<string> coll)
+        {
+            coll.TrimExcess();
+            Console.WriteLine("Размерность коллекции теперь равна фактическому количеству элементов, находящемуся в коллекции!");
+            Back();
+        }
+
+        public static void count(ref HashSet<string> coll)
+        {
+            Console.WriteLine($"Длина коллекции = {coll.Count}");
+            Back();
+        }
+
+        public static void PrintValues(ref HashSet<string> coll)
+        {
+            System.Collections.IEnumerator enumerator = coll.GetEnumerator();
+            Console.WriteLine("Ваша коллекция:");
+            while (enumerator.MoveNext())
+            {
+                Console.Write("\t{0}", enumerator.Current);
+            }
+            Back();
+        }
+    }
+}
+
+
+
