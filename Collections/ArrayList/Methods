@@ -1,0 +1,156 @@
+using ConsoleApplication26;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace qwerty
+{
+    internal class Methods
+    {
+        private static void Back()
+        {
+            Menu.DEnter();
+            Console.Write("Нажмите любую клавишу для возвращения к меню...");
+            Console.ReadKey();
+            Console.Clear();
+            Menu.Print();
+        }
+        public static void add(ref ArrayList coll)
+        {
+            Console.Write("Введите элемент, который хотите добавить: ");
+            coll.Add(Protect.NotNull(Console.ReadLine()));
+            Back();
+        }
+        public static void clear(ref ArrayList coll)
+        {
+            coll.Clear();
+            Console.WriteLine("Коллекция была успешно очищенна!");
+            Back();
+        }
+        public static void getHashCode(ref ArrayList coll)
+        {
+            Console.WriteLine("Результат метода: " + coll.GetHashCode());
+            Back();
+        }
+        public static void binarySearch(ref ArrayList coll)
+        {
+            string[] arr = new string[coll.Count];
+            coll.CopyTo(arr, 0);
+            Array.Sort(arr);
+            Console.Write("Введите элемент, который желаете найти: ");
+            int ind = Array.BinarySearch(arr, Protect.NotNull( Console.ReadLine()));
+            Menu.DEnter();
+            if (ind >= 0)
+            {
+                Console.Write("Элемент находится под индексом: " + ind);
+            }
+            else
+            {
+                Console.WriteLine("Такого элемента нет в коллекции!");
+            }
+            Back();
+        }
+        public static void copyTo(ref ArrayList coll)
+        {
+            string[] arr = new string[coll.Count];
+            coll.CopyTo(arr, 0);
+            Console.WriteLine("Коллекцция была успешно скопированна в массив!");
+            Back();
+        }
+        public static void contains(ref ArrayList coll)
+        {
+            Console.Write("Введите значение, наличие которого в коллекции в хотите проверить: ");
+            string value = Console.ReadLine() ;
+            Menu.DEnter();
+            if (coll.Contains(value))
+            {
+                Console.WriteLine("Значение имеется в коллекции.");
+            }
+            else
+            {
+                Console.WriteLine("Такого элемента в коолекции нет.");
+            }
+            Back();
+        }
+        public static void indexOf(ref ArrayList coll)
+        {
+            Console.Write("Введите элемент, индекс которого хотите отыскать: ");
+            int ind = coll.IndexOf(Protect.NotNull(Console.ReadLine()));
+            Menu.DEnter();
+            if (ind >= 0)
+            {
+                Console.Write("Элемент находится под индексом: " + ind);
+            }
+            else
+            {
+                Console.WriteLine("Такого элемента нет в коллекции!");
+            }
+            Back();
+        }
+        public static void insert(ref ArrayList coll)
+        {
+            Console.Write("Введите индекс элемента, который хотите заменить: ");
+            int ind = Protect.ToInt(Console.ReadLine());
+            Console.Write("Введите значение элемента, на которое хотите заменить: ");
+            string value = Protect.NotNull(Console.ReadLine());
+            Menu.DEnter();
+            if (ind < coll.Count)
+            {
+                coll.Insert(ind, value);
+                Console.WriteLine("Элемент был успешно заменен!");
+            }
+            else
+            {
+                Console.WriteLine("Индекс превышает размерность коллекции!");
+            }
+            Menu.DEnter();
+            Back();
+        }
+        public static void remove(ref ArrayList coll)
+        {
+            Console.Write("Введите элемент, который хотите удалить: ");
+            string value = Protect.NotNull(Console.ReadLine());
+            Menu.DEnter();
+            if (coll.Contains(value) )
+            {
+                coll.Remove(value);
+                Console.WriteLine("Элемент был успешно удален!");
+            }
+            else
+            {
+                Console.WriteLine("Элемента нет в коллекции!");
+
+            }
+            Back();
+        }
+        public static void reverse(ref ArrayList coll)
+        {
+            coll.Reverse();
+            Console.WriteLine($"{Program.collection_name} был успешно развернут!");
+            Back();
+        }
+
+        public static void count(ref ArrayList coll)
+        {
+            Console.WriteLine($"Длина коллекции = {coll.Count}");
+            Back();
+        }
+
+        public static void PrintValues(ref ArrayList coll)
+        {
+            System.Collections.IEnumerator enumerator = coll.GetEnumerator();
+            Console.WriteLine("Ваша коллекция:");
+            while (enumerator.MoveNext())
+            {
+                Console.Write("\t{0}", enumerator.Current);
+            }
+            Back();
+        }
+    }
+}
+
+
+
