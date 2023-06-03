@@ -1,0 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace qwerty
+{
+    internal class Wash
+    {
+        public static void wash(Car car)
+        {
+            Console.WriteLine();
+            car.washed = 1;
+            Console.WriteLine(car.name + " была успешно очищенна от загрязнений!");
+        }
+    }
+}
