@@ -1,0 +1,57 @@
+using System;
+using System.Text;
+using System.IO;
+using System.Collections.Generic;
+using qwerty;
+
+namespace ConsoleApplication26
+{
+    class Program
+    {
+        public delegate void Washing<Car>(Car car);
+        static void Main()
+       {
+            Garage garage = new Garage();
+            garage.cars = new List<Car>();
+            using(StreamReader sr = new StreamReader(@"C:\Users\User\Desktop\cars.txt", Encoding.UTF8))
+            {
+                string str = string.Empty;
+                while ((str = sr.ReadLine()) != null)
+                {
+                    Car car = new Car();   
+                    string[] arr = str.Split(' ');
+                    foreach (string s in arr)
+                    {
+                        if (s == "0" || s == "1")
+                        {
+                            car.washed = Convert.ToInt32(s);
+                        }
+                        else
+                        {
+                            if (car.name == String.Empty)
+                            {
+                                car.name += s;
+                            }
+                            else
+                            {
+                                car.name += " " + s;
+                            }
+                        }
+                    }
+                    if (car != null)
+                    {
+                        garage.cars.Add(car);
+                    }
+                }
+                foreach (Car auto in garage.cars)
+                {
+                    Washing<Car> wash = new Washing<Car>(Wash.wash);
+                    wash(auto);
+                }
+            }
+       }
+    }
+}
+
+       
+   
