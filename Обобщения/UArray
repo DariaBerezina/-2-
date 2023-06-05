@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp3
+{
+    internal class UArray<T>
+    {
+
+        T[] uArray;   // массив с данными
+        public UArray()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Введите размерность массива: ");
+            uArray = new T[Convert.ToInt32(Console.ReadLine())];
+        }
+        // добавление данных
+        public void Add(int index, T value)
+        {
+            if (index == -1)
+            {
+                uArray[uArray.Length - 1] = value;
+            }
+            if (index < uArray.Length)
+            {
+                uArray[index] = value;
+            }
+            else { Console.WriteLine("Ошибка. Индекс превышает размерность массива!"); }
+        }
+        // удаление данных - удаляем первое вхождение элемента при его наличии
+        public void Remove(int index)
+        {
+            if (index == -1)
+            {
+                uArray[uArray.Length - 1] = default(T);
+            }
+            if (index < uArray.Length)
+            {
+                uArray[index] = default(T);
+            }
+            else { Console.WriteLine("Ошибка. Индекс превышает размерность массива!"); }
+        }
+        // получение элемента по индексу
+        public void idexOf(int index)
+        {
+            if (index < uArray.Length)
+            {
+                Console.WriteLine("Элемент под индексом №" + index + " = " + uArray[index]);
+            }
+            else { Console.WriteLine("Ошибка. Индекс превышает размерность массива!"); }
+        }
+        public void PrintValues()
+        {
+            for (int i = 0; i < uArray.Length; i++)
+            {
+                Console.Write(uArray[i] + " ");
+            }
+        }
+    }
+}
