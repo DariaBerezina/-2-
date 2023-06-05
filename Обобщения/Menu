@@ -1,0 +1,106 @@
+using ConsoleApp3;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp3
+{
+    internal class Menu
+    {
+        public static UArray<int> array = new UArray<int>();
+        //public static void create()
+        //{
+        //    Console.WriteLine("Выберете тип элементов, которые будут хранится в массиве: ");
+        //    Console.WriteLine("1. string");
+        //    Console.WriteLine("2. int");
+        //    Console.WriteLine("3. double");
+        //    Console.WriteLine();
+        //    Console.WriteLine("Введите номер интересующего Вас типа: ");
+        //    int option = Convert.ToInt32(Console.ReadLine());
+        //    Console.Write("Введите размерность массива: ");
+        //    int dim = Convert.ToInt32(Console.ReadLine());
+        //    Console.ReadLine();
+        //    Console.WriteLine("Нажмите любую клавишу для продолжения...");
+        //    string str = "string";
+        //    string integ = "int";
+        //    string doub = "double";
+        //    Console.ReadKey();
+        //    switch (option)
+        //    {
+        //        case 1:
+        //            string_array = new UArray<string>(dim);
+        //            Menu.Print("string");
+        //            break;
+        //        case 2:
+        //            int_array = new UArray<int>(Convert.ToInt32(dim));
+        //            Menu.Print("int");
+        //            break;
+        //        case 3:
+        //            double_array = new UArray<double>(Convert.ToInt32(dim));
+        //            Menu.Print("double");
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
+        //public static void Start()
+        //{
+        //    var arr = Menu.create();
+
+        //}
+        static void Back()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Нажмите любую клавишу для продолжения...");
+            Console.ReadKey();
+            Console.Clear();
+            Menu.Print();
+        }
+        public static void Print()
+        {
+            Console.WriteLine("Меню");
+            Console.WriteLine();
+            Console.WriteLine("1. Добавить элемент по указанному индексу");
+            Console.WriteLine("2. Удалить элемент по указанному индексу");
+            Console.WriteLine("3. Посмотреть элемент, находящийся по указанному индексу");
+            Console.WriteLine("4. Просмотреть элементы коллекции");
+            Console.WriteLine();
+            Console.WriteLine("Введите номер интересующего Вас пункта: ");
+            int option = Convert.ToInt32(Console.ReadLine());
+            switch (option)
+            {
+                case 1:
+                    Console.Write("Введите индекс элемента: ");
+                    int ind = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Введите значение элемента, которое будет помещенно по указанному индексу: ");
+                    int value = Convert.ToInt32(Console.ReadLine());
+                    array.Add(ind, value);
+                    Back();
+                    break;
+                case 2:
+                    Console.Write("Введите индекс элемента, которой хотите удалить: ");
+                    ind = Convert.ToInt32(Console.ReadLine());
+                    array.Remove(ind);
+                    Back();
+                    break;
+                case 3:
+                    Console.Write("Введите индекс элемента, которой хотите просмотреть: ");
+                    ind = Convert.ToInt32(Console.ReadLine());
+                    array.idexOf(ind);
+                    Back();
+                    break;
+                case 4:
+                    Console.WriteLine("Элементы вашей коллекции: ");
+                    array.PrintValues();
+                    Back();
+                    break;
+                default:
+                    Console.WriteLine("Неверно был введен номер пункта.");
+                    Back();
+                    break;
+            }
+        }
+    }
+}
