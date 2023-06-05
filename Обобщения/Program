@@ -1,0 +1,16 @@
+using System;
+using System.Text;
+using System.IO;
+using System.Collections.Generic;
+using ConsoleApp3;
+
+namespace ConsoleApplication26
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Menu.Print();
+        }
+    }
+}
