@@ -1,0 +1,22 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace qwerty
+{
+    public class DataContext
+    {
+        public List<Product> Products { get; set; }
+        public List<Supplier> Suppliers { get; set; }
+        public List<ProductSupply> ProductSupplies { get; set; }
+
+        public DataContext()
+        {
+            Products = new List<Product>();
+            Suppliers = new List<Supplier>();
+            ProductSupplies = new List<ProductSupply>();
+        }
+    }
+}
