@@ -1,0 +1,2 @@
+ALTER TABLE users
+	ADD "role"	INTEGER NOT NULL;
