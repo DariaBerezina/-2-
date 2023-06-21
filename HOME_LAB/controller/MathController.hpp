@@ -23,9 +23,9 @@ public:
 		: oatpp::web::server::api::ApiController(objectMapper)
 	{ }
 
-	// íèæå äîáàâëÿåì ìåòîäû
+	// Ã­Ã¨Ã¦Ã¥ Ã¤Ã®Ã¡Ã Ã¢Ã«Ã¿Ã¥Ã¬ Ã¬Ã¥Ã²Ã®Ã¤Ã»
 
-	// ñëîæåíèå
+	// Ã±Ã«Ã®Ã¦Ã¥Ã­Ã¨Ã¥
 	ENDPOINT_INFO(sum) {
 		info->tags = std::list<oatpp::String>{ "Math"};
 		info->summary = "Sum of two numbers";
@@ -46,7 +46,7 @@ public:
 		return ResponseFactory::createResponse(Status::CODE_200, createDto(a, b, a + b), objectMapper);
 	}
 
-	// âû÷èòíèå
+	// Ã¢Ã»Ã·Ã¨Ã²Ã­Ã¨Ã¥
 	ENDPOINT_INFO(substruct) {
 		info->tags = std::list<oatpp::String>{ "Math" };
 	}
@@ -54,7 +54,7 @@ public:
 		return ResponseFactory::createResponse(Status::CODE_200, createDto(a, b, a - b), objectMapper);
 	}
 
-	// óìíîæåíèå
+	// Ã³Ã¬Ã­Ã®Ã¦Ã¥Ã­Ã¨Ã¥
 	ENDPOINT_INFO(multiply) {
 		info->tags = std::list<oatpp::String>{ "Math" };
 	}
@@ -62,7 +62,7 @@ public:
 		return ResponseFactory::createResponse(Status::CODE_200, createDto(a, b, a * b), objectMapper);
 	}
 
-	// äåëåíèå
+	// Ã¤Ã¥Ã«Ã¥Ã­Ã¨Ã¥
 	ENDPOINT_INFO(divide) {
 		info->tags = std::list<oatpp::String>{ "Math" };
 	}
