@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace qwerty
+{
+    class Student
+    {
+        public string fio { get; set; }
+        public int day { get; set; }
+        public int month { get; set; }
+        public int year { get; set; }
+        public string group { get; set; }
+        public int[] subj_mark { get; set; }
+        public static Student Print()
+        {
+            Student n = new Student();
+            Console.WriteLine("Введите ФИО студента: ");
+            n.fio = Console.ReadLine();
+            Console.WriteLine("Введите день рождения: ");
+            n.day = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите месяц рождения: ");
+            n.month = int.Parse(Console.ReadLine());
+            Console.WriteLine("Введите год рождения: ");
+            n.year = int.Parse(Console.ReadLine());
+            Console.WriteLine("Дата рождения: ");
+            Console.WriteLine("{0}.{1}.{2}", n.day, n.month, n.year);
+            Console.WriteLine("Введите группу в которой обучается студент: ");
+            n.group = Console.ReadLine();
+            n.subj_mark = new int[4];
+            Console.WriteLine("Введите оценку, полученную за предмет.Если оценки нет (не выставлена), введите: 0 ");
+            for (int i = 0; i < 4; i++)
+            {
+                Console.Write("предмет №{0} = ", i + 1); n.subj_mark[i] = Convert.ToInt32(Console.ReadLine());
+            }
+            Console.WriteLine("Нажмите любую клавишу для продолжения");
+            Console.ReadKey();
+            Console.Clear();
+            return n;
+        }
+    }
+}
