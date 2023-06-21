@@ -1,0 +1,151 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace qwerty
+{
+    internal class Menu
+    {
+        private static void Back(Student[] mass)
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.Write("Нажмите любую клавишу для возвращения к меню...");
+            Console.ReadKey();
+            Console.Clear();
+            Menu.Print(mass);
+        }
+
+        public static void Print(Student[] arr)
+        {
+            Console.Clear();
+            Console.WriteLine(" Меню: ");
+            Console.WriteLine("1. Поиск студентов, которые учатся в заданной группе: ");
+            Console.WriteLine("2. Поиск студентов должников: ");
+            Console.WriteLine("3. Поиск студентов отличников: ");
+            Console.WriteLine("4. Поиск студентов моложе 20 лет: ");
+            Console.WriteLine("5. Выход");
+            string number = Console.ReadLine();
+            switch (Convert.ToInt32(number))
+            {
+                case 1:
+
+                    Console.Clear();
+
+                    int one = 0;
+                    Console.WriteLine("Введите группу, студентов которой нужно найти: ");
+                    string group = Console.ReadLine();
+                    foreach (Student n in arr)
+                    {
+                        if (n.group == group)
+                        {
+                            one++;
+                            Console.WriteLine(n.fio);
+                        }
+                    }
+                    if (one == 0)
+                    {
+                        Console.WriteLine("Информация о данной группе отсутствует: ");
+                    }
+                    Console.WriteLine("Нажмите любую клавишу для продолжения");
+                    Console.ReadKey();
+                    Print(arr);
+                    Back(arr);
+                    break;
+
+                case 2:
+
+                    Console.Clear();
+
+                    int two = 0;
+                    foreach (Student n in arr)
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            if ((n.subj_mark[i] == 0) || (n.subj_mark[i] == 1) || (n.subj_mark[i] == 2))
+                            {
+                                Console.WriteLine(n.fio);
+                                two++;
+                                break;
+                            }
+                        }
+                    }
+                    if (two == 0)
+                    {
+                        Console.WriteLine("Нет студентов с задолжностями");
+                    }
+                    Console.WriteLine("Нажмите любую клавишу для продолжения");
+                    Console.ReadKey();
+                    Print(arr);
+                    Back(arr);
+                    break;
+
+                case 3:
+
+                    Console.Clear();
+
+                    int three = 0;
+                    foreach (Student n in arr)
+                    {
+                        int t = 0;
+                        for (int i = 0; i < 4; i++)
+                        {
+                            if (n.subj_mark[i] == 5)
+                            {
+                                t++;
+                            }
+                        }
+                        if (t == 4)
+                        {
+                            three++;
+                            Console.WriteLine(n.fio);
+                        }
+                    }
+                    if (three == 0)
+                    {
+                        Console.WriteLine("Нет студентов-отличников");
+                    }
+                    Console.WriteLine("Нажмите любую клавишу для продолжения");
+                    Console.ReadKey();
+                    Print(arr);
+                    Back(arr);
+                    break;
+
+                case 4:
+
+                    Console.Clear();
+
+                    int chet = 0;
+                    foreach (Student n in arr)
+                    {
+                        if ((2023 - n.year) * 365 + n.month * 31 + n.day < 20 * 365)
+                        {
+                            chet++;
+                            Console.WriteLine(n.fio);
+                        }
+                    }
+                    if (chet == 0)
+                    {
+                        Console.WriteLine("Нет студентов младше 20");
+                    }
+                    Console.WriteLine("Нажмите любую клавишу для продолжения");
+                    Console.ReadKey();
+                    Print(arr);
+                    Back(arr);
+                    break;
+                case 5:
+                    Environment.Exit(0);
+                    break;
+                default:
+
+                    Console.Clear();
+
+                    Console.WriteLine("Неверно введен номер пункта!");
+                    Back(arr);
+                    break;
+            }
+        }
+    }
+}
